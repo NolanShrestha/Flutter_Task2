@@ -9,6 +9,7 @@ import 'package:task2/screens/page3.dart';
 import 'package:task2/widgets/CustomNavBar.dart';
 import 'package:task2/widgets/CustomDropDown.dart';
 import 'package:task2/address.dart';
+import 'package:task2/widgets/RecipeInfo.dart';
 
 class Page1 extends StatefulWidget {
   const Page1({super.key});
@@ -512,6 +513,28 @@ class _Page1State extends State<Page1> {
                                       time: category['attributes']
                                               ['PrepTime'] ??
                                           'Unknown Time',
+                                      onTap: () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) => RecipeInfo(
+                                              recipeData: {
+                                                'slug': category['attributes']
+                                                    ['slug'],
+                                                'time': category['attributes']
+                                                    ['PrepTime'],
+                                                'calories':
+                                                    category['attributes']
+                                                        ['calories'],
+                                                'Ingredients':
+                                                    category['attributes']
+                                                        ['Ingredients'],
+                                                'imageUrl': imageUrl,
+                                              },
+                                            ),
+                                          ),
+                                        );
+                                      },
                                     );
                                   },
                                 ),

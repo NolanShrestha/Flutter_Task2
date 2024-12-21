@@ -6,6 +6,7 @@ class CustomRecipe extends StatelessWidget {
   final double rating;
   final int reviewsCount;
   final String time;
+  final VoidCallback onTap;
 
   const CustomRecipe({
     required this.imageUrl,
@@ -13,6 +14,7 @@ class CustomRecipe extends StatelessWidget {
     required this.rating,
     required this.reviewsCount,
     required this.time,
+    required this.onTap,
   });
 
   @override
@@ -21,10 +23,12 @@ class CustomRecipe extends StatelessWidget {
 
     return Container(
       decoration: BoxDecoration(
-        color: theme.colorScheme.surfaceContainerHighest,
+        color: theme.colorScheme.surface,
         borderRadius: BorderRadius.circular(16),
       ),
       child: InkWell(
+        onTap: onTap,
+        borderRadius: BorderRadius.circular(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
