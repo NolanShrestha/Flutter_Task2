@@ -17,7 +17,6 @@ class PageTheme {
         primary: primaryColor,
         secondary: accentColor,
         surface: surfaceColor,
-        background: backgroundColor,
         onPrimary: Colors.white,
         onSecondary: Colors.black,
         onSurface: lightTextColor,
@@ -69,7 +68,7 @@ class PageTheme {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12),
           ),
-          shadowColor: Colors.black.withOpacity(0.5),
+          shadowColor: Colors.black.withAlpha((0.5 * 255).toInt()),
           elevation: 8,
         ),
       ),
@@ -144,7 +143,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           ),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.7),
+              color: Colors.black.withAlpha((0.7 * 255).toInt()),
               offset: const Offset(0, 5),
               blurRadius: 12,
             ),
