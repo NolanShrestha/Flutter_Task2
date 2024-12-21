@@ -9,7 +9,7 @@ import 'package:task2/screens/page3.dart';
 import 'package:task2/widgets/CustomNavBar.dart';
 import 'package:task2/widgets/CustomDropDown.dart';
 import 'package:task2/address.dart';
-import 'package:task2/widgets/RecipeInfo.dart';
+import 'package:task2/screens/RecipeInfo.dart';
 
 class Page1 extends StatefulWidget {
   const Page1({super.key});

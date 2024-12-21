@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:task2/theme.dart';
+import 'page2.dart';
+import 'page3.dart';
 
 class RecipeInfo extends StatelessWidget {
   final Map<String, dynamic> recipeData;
@@ -58,7 +60,13 @@ class RecipeInfo extends StatelessWidget {
                     IconButton(
                       icon: const Icon(Icons.favorite_border,
                           color: PageTheme.primaryColor),
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const Page2()),
+                        );
+                      },
                     ),
                   ],
                 ),
@@ -91,7 +99,13 @@ class RecipeInfo extends StatelessWidget {
                         IconButton(
                           icon: const Icon(Icons.add_comment_rounded,
                               color: PageTheme.primaryColor),
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const Page3()),
+                            );
+                          },
                           iconSize: 30,
                         ),
                       ],
