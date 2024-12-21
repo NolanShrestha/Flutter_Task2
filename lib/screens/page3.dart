@@ -10,6 +10,16 @@ class Page3 extends StatefulWidget {
 class _Page3State extends State<Page3> {
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return const Center(
+      child: Column(
+        children: [
+          Text(
+            'Page 3',
+            style: TextStyle(fontSize: 30),
+          ),
+          Icon(Icons.message_outlined, size: 50, color: Colors.blue),
+        ],
+      ),
+    );
   }
 }
