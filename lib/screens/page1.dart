@@ -433,7 +433,7 @@ class _Page1State extends State<Page1> {
 
                                   switch (region) {
                                     case 'American':
-                                      icon = Icons.local_dining_outlined;
+                                      icon = Icons.table_restaurant_rounded;
                                       iconColor = Colors.red;
                                       break;
                                     case 'English':
@@ -570,6 +570,20 @@ class _Page1State extends State<Page1> {
                                                             ['Ingredients'] ??
                                                         'No Ingredients',
                                                 'imageUrl': imageUrl,
+                                                'VeganFriendly':
+                                                    category['attributes']
+                                                            ['VeganFriendly'] ??
+                                                        false,
+                                                'GlutenFree':
+                                                    category['attributes']
+                                                            ['GlutenFree'] ??
+                                                        false,
+                                                'Steps': category['attributes']
+                                                        ['Steps'] ??
+                                                    '',
+                                                'Tips': category['attributes']
+                                                        ['Tips'] ??
+                                                    '',
                                               },
                                             ),
                                           ),
