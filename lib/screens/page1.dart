@@ -121,6 +121,15 @@ class _Page1State extends State<Page1> {
               String slug = 'Unknown Dish';
               String prepTime = 'Unknown Time';
 
+              String type = 'Unknown Type';
+              int calorie = 0;
+              int servingSize = 0;
+              bool glutenFree = false;
+              bool veganFriendly = false;
+              String steps = 'No steps available';
+              String ingredients = 'No ingredients available';
+              String tips = 'No tips available';
+
               if (item is Map) {
                 var attributes = item['attributes'] ?? item;
 
@@ -141,6 +150,14 @@ class _Page1State extends State<Page1> {
 
                 slug = attributes['slug'] ?? slug;
                 prepTime = attributes['PrepTime'] ?? prepTime;
+                type = attributes['Type'] ?? type;
+                calorie = attributes['Calorie'] ?? calorie;
+                servingSize = attributes['ServingSize'] ?? servingSize;
+                glutenFree = attributes['GlutenFree'] ?? glutenFree;
+                veganFriendly = attributes['VeganFriendly'] ?? veganFriendly;
+                steps = attributes['Steps'] ?? steps;
+                ingredients = attributes['Ingredients'] ?? ingredients;
+                tips = attributes['Tips'] ?? tips;
               }
 
               return {
@@ -149,6 +166,14 @@ class _Page1State extends State<Page1> {
                   'slug': slug,
                   'PrepTime': prepTime,
                   'Image': imageUrl,
+                  'Type': type,
+                  'Calorie': calorie,
+                  'ServingSize': servingSize,
+                  'GlutenFree': glutenFree,
+                  'VeganFriendly': veganFriendly,
+                  'Steps': steps,
+                  'Ingredients': ingredients,
+                  'Tips': tips,
                 },
               };
             }).toList();
@@ -168,15 +193,12 @@ class _Page1State extends State<Page1> {
   }
 
   List<dynamic> typedRecipes = [];
-
   Future<void> fetchRecipesByType(String type) async {
     final url =
         'http://$ip:1337/api/categories?filters[Type]=$type&populate[Image][fields]=url';
 
     try {
       final response = await http.get(Uri.parse(url));
-      print('Response Status Code: ${response.statusCode}');
-      print('Response Body: ${response.body}');
 
       if (response.statusCode == 200) {
         final responseData = jsonDecode(response.body);
@@ -188,13 +210,20 @@ class _Page1State extends State<Page1> {
           recipeData = responseData;
         }
 
-        print('Recipes of Type $type - Data Length: ${recipeData.length}');
-
         setState(() {
           typedRecipes = recipeData.map<Map<String, dynamic>>((item) {
             String imageUrl = 'assets/logo.png';
             String slug = 'Unknown Dish';
             String prepTime = 'Unknown Time';
+
+            String type = 'Unknown Type';
+            int calorie = 0;
+            int servingSize = 0;
+            bool glutenFree = false;
+            bool veganFriendly = false;
+            String steps = 'No steps available';
+            String ingredients = 'No ingredients available';
+            String tips = 'No tips available';
 
             if (item is Map) {
               var attributes = item['attributes'] ?? item;
@@ -216,6 +245,14 @@ class _Page1State extends State<Page1> {
 
               slug = attributes['slug'] ?? slug;
               prepTime = attributes['PrepTime'] ?? prepTime;
+              type = attributes['Type'] ?? type;
+              calorie = attributes['Calorie'] ?? calorie;
+              servingSize = attributes['ServingSize'] ?? servingSize;
+              glutenFree = attributes['GlutenFree'] ?? glutenFree;
+              veganFriendly = attributes['VeganFriendly'] ?? veganFriendly;
+              steps = attributes['Steps'] ?? steps;
+              ingredients = attributes['Ingredients'] ?? ingredients;
+              tips = attributes['Tips'] ?? tips;
             }
 
             return {
@@ -224,23 +261,26 @@ class _Page1State extends State<Page1> {
                 'slug': slug,
                 'PrepTime': prepTime,
                 'Image': imageUrl,
-                'Type': type
-              }
+                'Type': type,
+                'Calorie': calorie,
+                'ServingSize': servingSize,
+                'GlutenFree': glutenFree,
+                'VeganFriendly': veganFriendly,
+                'Steps': steps,
+                'Ingredients': ingredients,
+                'Tips': tips,
+              },
             };
           }).toList();
-
-          print(
-              'Processed Recipes of Type $type Count: ${typedRecipes.length}');
         });
       } else {
-        throw Exception(
-            'Failed to load recipes of type $type: ${response.statusCode}');
+        throw Exception('Failed to load recipes: ${response.statusCode}');
       }
     } catch (e) {
-      print('Error fetching recipes of type $type: $e');
+      print('Error fetching recipes by type: $e');
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('Failed to fetch recipes of type $type: $e'),
+          content: Text('Failed to fetch recipes by type: $e'),
         ),
       );
     }
@@ -461,7 +501,7 @@ class _Page1State extends State<Page1> {
                                         ? typedRecipes[index]
                                         : categories[index];
 
-                                    String imageUrl;
+                                    String imageUrl = 'assets/logo.png';
                                     switch (category['attributes']['slug']) {
                                       case 'Cheeseburger':
                                         imageUrl = 'assets/Cheeseburger.jpg';
@@ -499,8 +539,6 @@ class _Page1State extends State<Page1> {
                                       case 'Pasta':
                                         imageUrl = 'assets/Pasta.jpg';
                                         break;
-                                      default:
-                                        imageUrl = 'assets/logo.png';
                                     }
 
                                     return CustomRecipe(
@@ -525,10 +563,12 @@ class _Page1State extends State<Page1> {
                                                     ['PrepTime'],
                                                 'calories':
                                                     category['attributes']
-                                                        ['calories'],
+                                                            ['Calorie'] ??
+                                                        'Unknown Calories',
                                                 'Ingredients':
                                                     category['attributes']
-                                                        ['Ingredients'],
+                                                            ['Ingredients'] ??
+                                                        'No Ingredients',
                                                 'imageUrl': imageUrl,
                                               },
                                             ),
@@ -538,7 +578,7 @@ class _Page1State extends State<Page1> {
                                     );
                                   },
                                 ),
-                              )
+                              ),
                             ],
                           ),
                         ),

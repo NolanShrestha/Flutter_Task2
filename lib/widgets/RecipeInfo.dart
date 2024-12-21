@@ -12,14 +12,16 @@ class RecipeInfo extends StatelessWidget {
     final String dishName = recipeData['slug'] ?? 'Unknown Dish';
     const double rating = 4.5;
     const int reviewsCount = 300;
-    final String cookingTime = recipeData['time'] ?? 30;
-    print('Cooking time: $cookingTime');
-    final int calories = recipeData['calories'] ?? 250;
-    final List<String> ingredients = recipeData['Ingredients']
-            ?.split('\n')
+    final String cookingTime = recipeData['time']?.toString() ?? '30';
+    final String calories = recipeData['calories']?.toString() ?? '250';
+
+    final String ingredientsRaw = recipeData['Ingredients'] ?? '';
+    final List<String> ingredients = ingredientsRaw.isNotEmpty
+        ? ingredientsRaw
+            .split('\n')
             .map((e) => e.replaceFirst('- ', '').trim())
-            .toList() ??
-        [];
+            .toList()
+        : [];
 
     final String imageUrl = recipeData['imageUrl'] ?? 'assets/Ramen.jpg';
 
@@ -128,7 +130,6 @@ class RecipeInfo extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    const SizedBox(height: 12),
                     ListView.builder(
                       shrinkWrap: true,
                       physics: const NeverScrollableScrollPhysics(),
@@ -143,19 +144,16 @@ class RecipeInfo extends StatelessWidget {
                           child: ListTile(
                             leading: CircleAvatar(
                               backgroundColor: Colors.grey[200],
-                              backgroundImage:
-                                  const AssetImage('assets/placeholder.jpg'),
+                              child: const Icon(
+                                Icons.restaurant_menu_rounded,
+                                color: Colors.black,
+                                size: 24,
+                              ),
                             ),
                             title: Text(
                               ingredients[index],
                               style: theme.textTheme.bodyLarge?.copyWith(
                                 fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            trailing: Text(
-                              '200g',
-                              style: theme.textTheme.bodyMedium?.copyWith(
-                                color: PageTheme.hintColor,
                               ),
                             ),
                           ),
