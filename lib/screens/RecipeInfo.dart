@@ -14,8 +14,8 @@ class RecipeInfo extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = PageTheme.getDarkTheme();
     final String dishName = recipeData['slug'] ?? 'Unknown Dish';
-    const double rating = 4.5;
-    const int reviewsCount = 300;
+    const double rating = 4.8;
+    const int reviewsCount = 163;
     final String cookingTime = recipeData['time']?.toString() ?? '30';
     final String calories = recipeData['calories']?.toString() ?? '250';
 
@@ -199,6 +199,13 @@ class RecipeInfo extends StatelessWidget {
                           ],
                         ),
                       ],
+                    ),
+                    const SizedBox(height: 20),
+                    const Divider(
+                      color: PageTheme.hintColor,
+                      thickness: 4,
+                      indent: 16,
+                      endIndent: 16,
                     ),
                     const SizedBox(height: 20),
                     CustomListTile(
