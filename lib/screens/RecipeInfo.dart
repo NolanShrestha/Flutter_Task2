@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:task2/theme.dart';
 import 'page2.dart';
 import 'page3.dart';
+import 'package:task2/widgets/CustomListTile.dart';
+import 'package:task2/widgets/CustomStepWidget.dart';
 
 class RecipeInfo extends StatelessWidget {
   final Map<String, dynamic> recipeData;
@@ -199,125 +201,44 @@ class RecipeInfo extends StatelessWidget {
                       ],
                     ),
                     const SizedBox(height: 20),
-                    Text(
-                      'Ingredients',
-                      style: theme.textTheme.headlineMedium?.copyWith(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                      ),
+                    CustomListTile(
+                      items: ingredients,
+                      title: 'Ingredients',
+                      icon: Icons.restaurant_menu_rounded,
+                      countLabel: 'items',
                     ),
-                    ListView.builder(
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      itemCount: ingredients.length,
-                      itemBuilder: (context, index) {
-                        return Card(
-                          margin: const EdgeInsets.only(bottom: 12),
-                          color: PageTheme.surfaceColor,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child: ListTile(
-                            leading: CircleAvatar(
-                              backgroundColor: Colors.grey[200],
-                              child: const Icon(
-                                Icons.restaurant_menu_rounded,
-                                color: Colors.black,
-                                size: 24,
-                              ),
-                            ),
-                            title: Text(
-                              ingredients[index],
-                              style: theme.textTheme.bodyLarge?.copyWith(
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
-                        );
+                    const SizedBox(height: 20),
+                    const Divider(
+                      color: PageTheme.hintColor,
+                      thickness: 4,
+                      indent: 16,
+                      endIndent: 16,
+                    ),
+                    const SizedBox(height: 20),
+                    CustomStepWidget(
+                      items: steps,
+                      title: 'Steps',
+                      getIcon: (index) {
+                        return index % 2 == 0
+                            ? Icons.format_list_numbered_rounded
+                            : Icons.format_list_numbered_rtl_rounded;
                       },
                     ),
                     const SizedBox(height: 20),
-                    Text(
-                      'Steps',
-                      style: theme.textTheme.headlineMedium?.copyWith(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    ListView.builder(
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      itemCount: steps.length,
-                      itemBuilder: (context, index) {
-                        IconData stepIcon;
-                        if (index % 2 == 0) {
-                          stepIcon = Icons.format_list_numbered_rounded;
-                        } else {
-                          stepIcon = Icons.format_list_numbered_rtl_rounded;
-                        }
-                        return Card(
-                          margin: const EdgeInsets.only(bottom: 12),
-                          color: PageTheme.surfaceColor,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child: ListTile(
-                            leading: CircleAvatar(
-                              backgroundColor: Colors.grey[200],
-                              child: Icon(
-                                stepIcon,
-                                color: Colors.black,
-                                size: 24,
-                              ),
-                            ),
-                            title: Text(
-                              steps[index],
-                              style: theme.textTheme.bodyLarge?.copyWith(
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
-                        );
-                      },
+                    const Divider(
+                      color: PageTheme.hintColor,
+                      thickness: 4,
+                      indent: 16,
+                      endIndent: 16,
                     ),
                     const SizedBox(height: 20),
-                    Text(
-                      'Tips',
-                      style: theme.textTheme.headlineMedium?.copyWith(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    ListView.builder(
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      itemCount: tips.length,
-                      itemBuilder: (context, index) {
-                        return Card(
-                          margin: const EdgeInsets.only(bottom: 12),
-                          color: PageTheme.surfaceColor,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child: ListTile(
-                            leading: CircleAvatar(
-                              backgroundColor: Colors.grey[200],
-                              child: const Icon(
-                                Icons.lightbulb_outline_rounded,
-                                color: Colors.black,
-                                size: 24,
-                              ),
-                            ),
-                            title: Text(
-                              tips[index],
-                              style: theme.textTheme.bodyLarge?.copyWith(
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
-                        );
-                      },
-                    ),
+                    CustomListTile(
+                      items: tips,
+                      title: 'Tips',
+                      icon: Icons.lightbulb_outline,
+                      subtitle: 'Helpful hints for preparation',
+                      countLabel: 'tips',
+                    )
                   ],
                 ),
               ),
