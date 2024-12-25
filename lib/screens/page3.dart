@@ -12,7 +12,6 @@ class Page3 extends StatelessWidget {
     this.dishName = 'Recipe',
     this.newComment,
   }) : super(key: key) {
-    // If there's a new comment, add it to ReviewsManager
     if (newComment != null) {
       ReviewsManager.addReview(newComment!);
     }
@@ -98,6 +97,7 @@ class Page3 extends StatelessWidget {
                             text: review['text'],
                             username: review['username'],
                             time: review['time'],
+                            dishName: review['dishName'],
                           );
                         },
                       ),

@@ -6,6 +6,7 @@ class CustomReview extends StatelessWidget {
   final String text;
   final String username;
   final String time;
+  final String? dishName;
 
   const CustomReview({
     Key? key,
@@ -13,10 +14,12 @@ class CustomReview extends StatelessWidget {
     required this.text,
     required this.username,
     required this.time,
+    this.dishName,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final theme = PageTheme.getDarkTheme();
     return Card(
       margin: const EdgeInsets.only(bottom: 12.0),
       color: PageTheme.surfaceColor,
@@ -40,6 +43,16 @@ class CustomReview extends StatelessWidget {
                 );
               }),
             ),
+            const SizedBox(height: 2),
+            if (dishName != null && dishName!.isNotEmpty) ...[
+              const SizedBox(height: 8),
+              Text(
+                dishName!,
+                style: theme.textTheme.headlineMedium?.copyWith(
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ],
             const SizedBox(height: 8),
             Text(
               text,

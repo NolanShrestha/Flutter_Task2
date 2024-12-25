@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:task2/theme.dart';
-import 'package:task2/screens/page3.dart';
 import 'package:task2/Models/ReviewsManager.dart';
+import 'package:task2/screens/page3.dart';
 
 class CustomDialog extends StatelessWidget {
   final TextEditingController commentController = TextEditingController();
@@ -71,6 +71,7 @@ class CustomDialog extends StatelessWidget {
               'text': commentController.text,
               'username': 'Nolan Shrestha',
               'time': 'Just now',
+              'dishName': dishName,
             };
             ReviewsManager.addReview(newComment);
             Navigator.of(context).pop();
