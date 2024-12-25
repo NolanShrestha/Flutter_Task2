@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:task2/theme.dart';
 import 'page2.dart';
-import 'page3.dart';
 import 'package:task2/widgets/CustomListTile.dart';
 import 'package:task2/widgets/CustomStepWidget.dart';
 import 'package:task2/Models/FavouritesManager.dart';
@@ -109,7 +108,8 @@ class RecipeInfo extends StatelessWidget {
                               context: context,
                               builder: (BuildContext context) {
                                 return CustomDialog(
-                                  onSubmit: () {},
+                                  dishName: dishName,
+                                  onSubmit: (String comment) {},
                                 );
                               },
                             );

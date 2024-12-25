@@ -1,11 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:task2/theme.dart';
+import 'package:task2/screens/page3.dart';
+import 'package:task2/Models/ReviewsManager.dart';
 
 class CustomDialog extends StatelessWidget {
   final TextEditingController commentController = TextEditingController();
-  final VoidCallback onSubmit;
+  final Function(String) onSubmit;
+  final String dishName;
 
-  CustomDialog({Key? key, required this.onSubmit}) : super(key: key);
+  CustomDialog({
+    Key? key,
+    required this.onSubmit,
+    required this.dishName,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -46,16 +53,12 @@ class CustomDialog extends StatelessWidget {
           ),
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(12.0),
-            borderSide:
-                const BorderSide(color: PageTheme.primaryColor, width: 2),
           ),
         ),
       ),
       actions: [
         TextButton(
-          onPressed: () {
-            Navigator.of(context).pop(); // Close the dialog
-          },
+          onPressed: () => Navigator.of(context).pop(),
           child: const Text(
             'Cancel',
             style: TextStyle(color: PageTheme.accentColor),
@@ -63,8 +66,22 @@ class CustomDialog extends StatelessWidget {
         ),
         ElevatedButton(
           onPressed: () {
-            onSubmit();
-            Navigator.of(context).pop(); // Close the dialog
+            final newComment = {
+              'rating': 4,
+              'text': commentController.text,
+              'username': 'Nolan Shrestha',
+              'time': 'Just now',
+            };
+            ReviewsManager.addReview(newComment);
+            Navigator.of(context).pop();
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => Page3(
+                  dishName: dishName,
+                ),
+              ),
+            );
           },
           style: ElevatedButton.styleFrom(
             backgroundColor: PageTheme.primaryColor,
