@@ -314,7 +314,7 @@ class _Page1State extends State<Page1> {
         break;
       case 2:
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) => const Page3()));
+            context, MaterialPageRoute(builder: (context) => Page3()));
         break;
     }
   }

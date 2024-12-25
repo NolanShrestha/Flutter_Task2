@@ -6,7 +6,7 @@ class FavoritesManager {
       favoriteDishes.add({
         'imageUrl': imageUrl,
         'dishName': dishName,
-        'rating': 4.5,
+        'rating': 4.8,
       });
     }
   }

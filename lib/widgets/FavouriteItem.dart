@@ -17,7 +17,7 @@ class FavouriteItem extends StatelessWidget {
     return Card(
       color: Theme.of(context).colorScheme.surface,
       elevation: 4,
-      margin: const EdgeInsets.symmetric(vertical: 8),
+      margin: const EdgeInsets.symmetric(vertical: 6),
       child: ListTile(
         contentPadding: const EdgeInsets.all(16),
         leading: ClipRRect(
@@ -56,7 +56,7 @@ class FavouriteItem extends StatelessWidget {
         trailing: const Icon(
           Icons.stars,
           color: Colors.amber,
-          size: 24,
+          size: 30,
         ),
       ),
     );

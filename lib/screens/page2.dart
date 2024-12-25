@@ -56,7 +56,7 @@ class _Page2State extends State<Page2> {
                             ),
                             const SizedBox(height: 16),
                             Text(
-                              'No favorites yet',
+                              'No favourites yet',
                               style: Theme.of(context)
                                   .textTheme
                                   .headlineSmall
