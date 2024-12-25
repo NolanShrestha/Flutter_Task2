@@ -62,8 +62,6 @@ class _Page1State extends State<Page1> {
   }
 
   List<String> regionsList = [];
-
-  // Fetch regions function
   Future<void> fetchRegions() async {
     const url = 'http://$ip:1337/api/categories/?fields=Region';
 
