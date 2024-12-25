@@ -4,7 +4,7 @@ import 'page2.dart';
 import 'page3.dart';
 import 'package:task2/widgets/CustomListTile.dart';
 import 'package:task2/widgets/CustomStepWidget.dart';
-import 'package:task2/widgets/Favouritesmanager.dart';
+import 'package:task2/Models/FavouritesManager.dart';
 
 class RecipeInfo extends StatelessWidget {
   final Map<String, dynamic> recipeData;

@@ -24,7 +24,7 @@ class FavouriteItem extends StatelessWidget {
           borderRadius: BorderRadius.circular(12.0),
           child: Image.asset(
             imageUrl,
-            width: 80, // Adjusted size for better visibility
+            width: 80,
             height: 80,
             fit: BoxFit.cover,
           ),
@@ -41,7 +41,7 @@ class FavouriteItem extends StatelessWidget {
               children: [
                 const Icon(
                   Icons.star,
-                  color: Colors.amber, // Star color
+                  color: Colors.amber,
                   size: 20,
                 ),
                 const SizedBox(width: 4),
@@ -54,8 +54,8 @@ class FavouriteItem extends StatelessWidget {
           ],
         ),
         trailing: const Icon(
-          Icons.stars, // Heart icon
-          color: Colors.red, // Red color for heart
+          Icons.stars,
+          color: Colors.amber,
           size: 24,
         ),
       ),

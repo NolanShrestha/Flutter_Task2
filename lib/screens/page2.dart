@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:task2/theme.dart';
 import 'package:task2/widgets/FavouriteItem.dart';
-import 'package:task2/widgets/Favouritesmanager.dart';
+import 'package:task2/Models/FavouritesManager.dart';
 
 class Page2 extends StatefulWidget {
   const Page2({Key? key}) : super(key: key);
-
   @override
   _Page2State createState() => _Page2State();
 }
@@ -45,17 +44,51 @@ class _Page2State extends State<Page2> {
             Expanded(
               child: Padding(
                 padding: const EdgeInsets.all(16.0),
-                child: ListView.builder(
-                  itemCount: FavoritesManager.favoriteDishes.length,
-                  itemBuilder: (context, index) {
-                    final dish = FavoritesManager.favoriteDishes[index];
-                    return FavouriteItem(
-                      imageUrl: dish['imageUrl'],
-                      dishName: dish['dishName'],
-                      rating: dish['rating'],
-                    );
-                  },
-                ),
+                child: FavoritesManager.favoriteDishes.isEmpty
+                    ? Center(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const Icon(
+                              Icons.favorite_border,
+                              size: 64,
+                              color: PageTheme.primaryColor,
+                            ),
+                            const SizedBox(height: 16),
+                            Text(
+                              'No favorites yet',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .headlineSmall
+                                  ?.copyWith(
+                                    color: PageTheme.lightTextColor,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                            ),
+                            const SizedBox(height: 8),
+                            Text(
+                              'Start adding your favorite dishes!',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodyMedium
+                                  ?.copyWith(
+                                    color: PageTheme.hintColor,
+                                  ),
+                            ),
+                          ],
+                        ),
+                      )
+                    : ListView.builder(
+                        itemCount: FavoritesManager.favoriteDishes.length,
+                        itemBuilder: (context, index) {
+                          final dish = FavoritesManager.favoriteDishes[index];
+                          return FavouriteItem(
+                            imageUrl: dish['imageUrl'],
+                            dishName: dish['dishName'],
+                            rating: dish['rating'],
+                          );
+                        },
+                      ),
               ),
             ),
           ],
