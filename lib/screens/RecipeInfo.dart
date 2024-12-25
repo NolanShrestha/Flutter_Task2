@@ -4,6 +4,7 @@ import 'page2.dart';
 import 'page3.dart';
 import 'package:task2/widgets/CustomListTile.dart';
 import 'package:task2/widgets/CustomStepWidget.dart';
+import 'package:task2/widgets/Favouritesmanager.dart';
 
 class RecipeInfo extends StatelessWidget {
   final Map<String, dynamic> recipeData;
@@ -59,10 +60,15 @@ class RecipeInfo extends StatelessWidget {
                       onPressed: () => Navigator.pop(context),
                     ),
                     const Spacer(),
+                    // In RecipeInfo widget, replace the favorite IconButton with:
+                    // In RecipeInfo widget, replace the favorite IconButton with:
                     IconButton(
                       icon: const Icon(Icons.favorite_border,
                           color: PageTheme.primaryColor),
                       onPressed: () {
+                        // Add to favorites first
+                        FavoritesManager.addToFavorites(imageUrl, dishName);
+                        // Then navigate to Page2
                         Navigator.push(
                           context,
                           MaterialPageRoute(

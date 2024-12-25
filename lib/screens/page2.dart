@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:task2/theme.dart';
 import 'package:task2/widgets/FavouriteItem.dart';
+import 'package:task2/widgets/Favouritesmanager.dart';
 
 class Page2 extends StatefulWidget {
   const Page2({Key? key}) : super(key: key);
@@ -16,26 +17,19 @@ class _Page2State extends State<Page2> {
       body: SafeArea(
         child: Column(
           children: [
-            const SizedBox(
-              height: 22,
-            ),
-            // Add Row inside SafeArea similar to AppBar
+            const SizedBox(height: 22),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: Row(
-                mainAxisAlignment:
-                    MainAxisAlignment.start, // Align items starting from left
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  // Back button to pop the screen
                   IconButton(
                     icon: const Icon(Icons.arrow_back,
                         color: PageTheme.lightTextColor),
                     onPressed: () => Navigator.pop(context),
                   ),
-                  // Text with left margin to center it
                   Padding(
-                    padding: const EdgeInsets.only(
-                        left: 68.0), // Left margin to push text right
+                    padding: const EdgeInsets.only(left: 68.0),
                     child: Text(
                       'Your Top Picks',
                       style:
@@ -45,42 +39,22 @@ class _Page2State extends State<Page2> {
                               ),
                     ),
                   ),
-                  // Optionally add more widgets to the right side if needed
                 ],
               ),
             ),
-
             Expanded(
               child: Padding(
                 padding: const EdgeInsets.all(16.0),
-                child: ListView(
-                  children: [
-                    FavouriteItem(
-                      imageUrl: 'assets/Cheeseburger.jpg',
-                      dishName: 'Spaghetti Bolognese',
-                      rating: 4.5,
-                    ),
-                    FavouriteItem(
-                      imageUrl: 'assets/Cheeseburger.jpg',
-                      dishName: 'Chicken Alfredo',
-                      rating: 4.7,
-                    ),
-                    FavouriteItem(
-                      imageUrl: 'assets/Cheeseburger.jpg',
-                      dishName: 'Vegetable Stir Fry',
-                      rating: 4.2,
-                    ),
-                    FavouriteItem(
-                      imageUrl: 'assets/Cheeseburger.jpg',
-                      dishName: 'Grilled Salmon',
-                      rating: 4.8,
-                    ),
-                    FavouriteItem(
-                      imageUrl: 'assets/Cheeseburger.jpg',
-                      dishName: 'Beef Tacos',
-                      rating: 4.6,
-                    ),
-                  ],
+                child: ListView.builder(
+                  itemCount: FavoritesManager.favoriteDishes.length,
+                  itemBuilder: (context, index) {
+                    final dish = FavoritesManager.favoriteDishes[index];
+                    return FavouriteItem(
+                      imageUrl: dish['imageUrl'],
+                      dishName: dish['dishName'],
+                      rating: dish['rating'],
+                    );
+                  },
                 ),
               ),
             ),
