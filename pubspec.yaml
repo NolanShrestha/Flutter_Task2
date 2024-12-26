@@ -38,6 +38,7 @@ dependencies:
   dropdown_button2: ^2.3.9
   http: ^1.2.2
   cached_network_image: ^3.4.1
+  video_player: ^2.9.2
 
 dev_dependencies:
   flutter_test:

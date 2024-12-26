@@ -5,15 +5,40 @@ import 'package:task2/widgets/CustomListTile.dart';
 import 'package:task2/widgets/CustomStepWidget.dart';
 import 'package:task2/Models/FavouritesManager.dart';
 import 'package:task2/widgets/CustomDialog.dart';
+import 'package:video_player/video_player.dart';
 
-class RecipeInfo extends StatelessWidget {
+class RecipeInfo extends StatefulWidget {
   final Map<String, dynamic> recipeData;
 
   const RecipeInfo({Key? key, required this.recipeData}) : super(key: key);
 
   @override
+  _RecipeInfoState createState() => _RecipeInfoState();
+}
+
+class _RecipeInfoState extends State<RecipeInfo> {
+  late VideoPlayerController _videoController;
+
+  @override
+  void initState() {
+    super.initState();
+    _videoController = VideoPlayerController.asset('assets/food.mp4')
+      ..initialize().then((_) {
+        setState(() {});
+      })
+      ..setLooping(true);
+  }
+
+  @override
+  void dispose() {
+    _videoController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final theme = PageTheme.getDarkTheme();
+    final recipeData = widget.recipeData;
     final String dishName = recipeData['slug'] ?? 'Unknown Dish';
     const double rating = 4.8;
     const int reviewsCount = 163;
@@ -251,7 +276,71 @@ class RecipeInfo extends StatelessWidget {
                       icon: Icons.lightbulb_outline,
                       subtitle: 'Helpful hints for preparation',
                       countLabel: 'tips',
-                    )
+                    ),
+                    const SizedBox(height: 20),
+                    const Divider(
+                      color: PageTheme.hintColor,
+                      thickness: 4,
+                      indent: 16,
+                      endIndent: 16,
+                    ),
+                    const SizedBox(height: 20),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Recipe Tutorial',
+                          style: theme.textTheme.headlineMedium?.copyWith(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        const SizedBox(height: 20),
+                        _videoController.value.isInitialized
+                            ? ClipRRect(
+                                borderRadius: BorderRadius.circular(20),
+                                child: AspectRatio(
+                                  aspectRatio:
+                                      _videoController.value.aspectRatio,
+                                  child: Stack(
+                                    alignment: Alignment.bottomCenter,
+                                    children: [
+                                      VideoPlayer(_videoController),
+                                      VideoProgressIndicator(
+                                        _videoController,
+                                        allowScrubbing: true,
+                                        colors: const VideoProgressColors(
+                                          playedColor: PageTheme.primaryColor,
+                                          backgroundColor: PageTheme.hintColor,
+                                        ),
+                                      ),
+                                      IconButton(
+                                        icon: Icon(
+                                          _videoController.value.isPlaying
+                                              ? Icons.pause
+                                              : Icons.play_arrow,
+                                          color: Colors.white,
+                                        ),
+                                        onPressed: () {
+                                          setState(() {
+                                            if (_videoController
+                                                .value.isPlaying) {
+                                              _videoController.pause();
+                                            } else {
+                                              _videoController.play();
+                                            }
+                                          });
+                                        },
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              )
+                            : const Center(
+                                child: CircularProgressIndicator(),
+                              ),
+                      ],
+                    ),
                   ],
                 ),
               ),
